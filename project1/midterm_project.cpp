@@ -1,13 +1,13 @@
 #include <iostream>
 #include <cctype>
-#define ARRAY_SIZE 20
-#define VALUE_SIZE 4
+#define STACK_ARRAY_SIZE 100
+#define VALUE_SIZE 100
 using namespace std;
 
 template <class T>
 class MyStack {
-	int tos;
-	T data[ARRAY_SIZE];
+	int tos; //top of stack
+	T data[STACK_ARRAY_SIZE];
 public:
 	MyStack();
 	void push(T element);
@@ -63,19 +63,19 @@ public:
 class Division : public Calculator {
 public:
 	int calc(int a, int b) { 
-		return a - b;
+		return a * b;
 	}
 };
 
 class Multiply : public Calculator {
 public:
 	int calc(int a, int b) { 
-		return a - b;
+		return a / b;
 	}
 };
 int main() {
 
-	char exp[ARRAY_SIZE] = "456+12";
+	char exp[] = "4+3*2";
 
 	MyStack<int> ipStack;
 	Add adder;
