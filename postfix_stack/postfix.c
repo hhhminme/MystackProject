@@ -111,7 +111,7 @@ int evaluatePostfix(char* exp)
 // Driver program to test above functions 
 int main()
 {
-    char exp[] = "3+4/4*3-2*5";
+    char exp[] = "42/3*2";
     printf("%d", evaluatePostfix(exp));
     return 0;
 }
