@@ -2,6 +2,9 @@
 #include <cctype>
 #define STACK_ARRAY_SIZE 100
 #define VALUE_SIZE 100
+#ifdef CALC
+#endif // CALC
+
 using namespace std;
 
 template <class T>
@@ -151,4 +154,50 @@ int main() {
 
 	exp[++k] = '\0';
 	printf("%s\n", exp);
+
+#ifdef CALC
+	for (i = 0; exp[i]; i++) {
+		if (exp[i] == ' ') continue;
+
+		else if (isdigit(exp[i])) {
+			int num = 0;
+
+			while (isdigit(exp[i])) {
+				num = num * 10 + (int)(exp[i] - '0');
+				i++;
+			}
+			i--;
+			ipStack.push(num);
+		}
+
+		else {
+			cpStack.push(exp[i]);
+		}
+
+	}
+
+	while (!cpStack.isEmpty()) {
+
+		int val1 = ipStack.pop();
+		int val2 = ipStack.pop();
+
+		switch (cpStack.pop())
+		{
+		case '+':
+			ipStack.push(adder.calc(val1, val2));
+			break;
+		case '-':
+			ipStack.push(subtractor.calc(val1, val2));
+			break;
+		case '*':
+			ipStack.push(multiplier.calc(val1, val2));
+			break;
+		case '/':
+			ipStack.push(divisior.calc(val1, val2));
+			break;
+		}
+	}
+
+	cout << "result : " << ipStack.pop() << endl;
+#endif CALC
 }
