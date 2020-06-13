@@ -6,9 +6,9 @@ using namespace std;
 
 template <class T>
 class MyStack {
-	int tos; //top of stack
 	T data[STACK_ARRAY_SIZE];
 public:
+	int tos; //top of stack
 	MyStack();
 	void push(T element);
 	T pop();
@@ -55,42 +55,44 @@ public:
 
 class Subtract : public Calculator {
 public:
-	int calc(int a, int b) { 
+	int calc(int a, int b) {
 		return a - b;
 	}
 };
 
 class Division : public Calculator {
 public:
-	int calc(int a, int b) { 
-		return a * b;
+	int calc(int a, int b) {
+		return a / b;
 	}
 };
 
 class Multiply : public Calculator {
 public:
-	int calc(int a, int b) { 
-		return a / b;
+	int calc(int a, int b) {
+		return a * b;
 	}
 };
 int main() {
 
-	char exp[] = "4+3*2";
+	char exp[] = "4/2+3";
 
 	MyStack<int> ipStack;
+	MyStack<char> cpStack;
+
 	Add adder;
 	Subtract subtractor;
 	Division divisior;
 	Multiply multiplier;
 
-	int i; 
+	int i;
 
 	for (i = 0; exp[i]; i++) {
 		if (exp[i] == ' ') continue;
 
 		else if (isdigit(exp[i])) {
 			int num = 0;
-		
+
 			while (isdigit(exp[i])) {
 				num = num * 10 + (int)(exp[i] - '0');
 				i++;
@@ -98,28 +100,37 @@ int main() {
 			i--;
 			ipStack.push(num);
 		}
-		else {
-			int val1 = ipStack.pop();
-			int val2 = ipStack.pop();
 
-			switch (exp[i])
-			{
-			case '+':
-				ipStack.push(adder.calc(val1, val2));
-				break;
-			case '-':
-				ipStack.push(subtractor.calc(val1, val2));
-				break;
-			case '*':
-				ipStack.push(multiplier.calc(val1, val2));
-				break;
-			case '/':
-				ipStack.push(divisior.calc(val1, val2));
-				break;
-			}
+		else {
+			cpStack.push(exp[i]);
+		}
+
+	}
+
+	while (!(cpStack.tos == -1)) {
+
+		int val1 = ipStack.pop();
+		int val2 = ipStack.pop();
+
+		switch (cpStack.pop())
+		{
+		case '+':
+			ipStack.push(adder.calc(val1, val2));
+			break;
+		case '-':
+			ipStack.push(subtractor.calc(val1, val2));
+			break;
+		case '*':
+			ipStack.push(multiplier.calc(val1, val2));
+			break;
+		case '/':
+			ipStack.push(divisior.calc(val1, val2));
+			break;
 		}
 	}
 
-	cout << ">result : " << ipStack.pop() << endl;
-	return 0; 
+	cout << "result : " << ipStack.pop() << endl;
+
+
+	return 0;
 }
