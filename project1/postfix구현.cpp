@@ -120,7 +120,7 @@ int main() {
 	MyStack<char>Stack;
 	MyStack<int> ipStack;
 	MyStack<char> cpStack;
-	char exp[] = "3+4/4*3-2*5";
+	char exp[] = "2+3*4";
 
 	Opercalc op;
 	Add adder;
@@ -155,18 +155,14 @@ int main() {
 	exp[++k] = '\0';
 	printf("%s\n", exp);
 
-#ifdef CALC
+//#ifdef CALC
 	for (i = 0; exp[i]; i++) {
 		if (exp[i] == ' ') continue;
 
 		else if (isdigit(exp[i])) {
 			int num = 0;
+			num = num * 10 + (int)(exp[i] - '0');
 
-			while (isdigit(exp[i])) {
-				num = num * 10 + (int)(exp[i] - '0');
-				i++;
-			}
-			i--;
 			ipStack.push(num);
 		}
 
@@ -199,5 +195,6 @@ int main() {
 	}
 
 	cout << "result : " << ipStack.pop() << endl;
-#endif CALC
+//#endif //CALC
 }
+//fuck yeah
