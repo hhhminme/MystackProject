@@ -12,7 +12,7 @@ public:
 	MyStack();
 	void push(T element);
 	T pop();
-	T top();
+	T peek();
 };
 
 template <class T>
@@ -41,7 +41,7 @@ T MyStack<T>::pop() {
 	return retData;
 }
 template<class T> 
-T MyStack<T>::top() {
+T MyStack<T>::peek() {
 	return data[tos];
 }
 
@@ -124,7 +124,7 @@ int main() {
 		int val2 = ipStack.pop();
 	
 
-		char ch = cpStack.top();
+		char ch = cpStack.peek();
 
 
 		switch (cpStack.pop())

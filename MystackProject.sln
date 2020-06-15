@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "copy", "copy\copy.vcxproj", "{7596CA33-2598-4A2B-B489-A107D4119C71}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "호현", "호현\호현.vcxproj", "{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{7596CA33-2598-4A2B-B489-A107D4119C71}.Release|x64.Build.0 = Release|x64
 		{7596CA33-2598-4A2B-B489-A107D4119C71}.Release|x86.ActiveCfg = Release|Win32
 		{7596CA33-2598-4A2B-B489-A107D4119C71}.Release|x86.Build.0 = Release|Win32
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Debug|x64.ActiveCfg = Debug|x64
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Debug|x64.Build.0 = Debug|x64
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Debug|x86.ActiveCfg = Debug|Win32
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Debug|x86.Build.0 = Debug|Win32
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Release|x64.ActiveCfg = Release|x64
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Release|x64.Build.0 = Release|x64
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Release|x86.ActiveCfg = Release|Win32
+		{8E7E0D0E-8975-46DD-8B73-4E2A1DDF749A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

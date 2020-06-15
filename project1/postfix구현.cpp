@@ -1,10 +1,8 @@
-#define _CRT_SECURE_NO_WARNINGS
-#define STACK_ARRAY_SIZE 100
-#define ARRAY_VALUE_SIZE 100
-#include <cctype>
 #include <iostream>
+#include <cctype>
+#define STACK_ARRAY_SIZE 100
+
 using namespace std;
-int postfix_calc(char exp[]);
 
 template <class T>
 class MyStack {
@@ -14,7 +12,7 @@ public:
 	MyStack();
 	void push(T element);
 	T pop();
-	T top(); //peek 
+	T peek(); //peek 
 	T isEmpty();
 };
 
@@ -45,7 +43,7 @@ T MyStack<T>::pop() {
 }
 
 template<class T>
-T MyStack<T>::top() { /// peek¿” 
+T MyStack<T>::peek() { /// peek¿” 
 	return data[tos];
 }
 
@@ -114,7 +112,8 @@ int Opercalc::isOperand(char ch) {
 	return (ch >= '0' && ch <= '9');
 }
 
-int postfix_calc(char arr[]) {
+int main() {
+	int i, k;
 	MyStack<char>Stack;
 	MyStack<int> ipStack;
 	MyStack<char> cpStack;
@@ -124,47 +123,44 @@ int postfix_calc(char arr[]) {
 	Subtract subtractor;
 	Division divisior;
 	Multiply multiplier;
-	char exp[ARRAY_VALUE_SIZE];
-	strcpy(exp,arr);
-	int i, k;
+
+	char exp[] = "3+4/4*3-2*5";
 
 	for (i = 0, k = -1; exp[i]; i++) {
-		if (op.isOperand(exp[i])) {
+		if (op.isOperand(exp[i]))
 			exp[++k] = exp[i];
-		}
+
+		else if (exp[i] == '(')
+			Stack.push(exp[i]);
+
 		else if (exp[i] == ')')
 		{
-			while (!(Stack.isEmpty()) && (Stack.top() != '('))
+			while (!Stack.isEmpty() && Stack.peek() != '(')
 				exp[++k] = Stack.pop();
-			if (!(Stack.isEmpty()) && Stack.top() != '(')
+			if (!Stack.isEmpty() && Stack.peek() != '(')
 				return -1; // invalid expression              
 			else
 				Stack.pop();
 		}
 		else // an operator is encountered 
 		{
-			while (!(Stack.isEmpty()) && op.Prec(exp[i]) <= op.Prec(Stack.top()))
+			while (!Stack.isEmpty() && op.Prec(exp[i]) <= op.Prec(Stack.peek()))
 				exp[++k] = Stack.pop();
 			Stack.push(exp[i]);
 		}
 	}
 
-	while (!(Stack.isEmpty()))
+	while (!Stack.isEmpty())
 		exp[++k] = Stack.pop();
 
 	exp[++k] = '\0';
 	printf("%s\n", exp);
 
-
-	//#ifdef CALC
 	for (i = 0; exp[i]; i++) {
 		if (exp[i] == ' ') continue;
 
 		else if (isdigit(exp[i])) {
-			int num = 0;
-			num = ((int)exp[i] - '0');
-
-			ipStack.push(num);
+			ipStack.push(exp[i]-'0');
 		}
 
 		else {
@@ -196,10 +192,5 @@ int postfix_calc(char arr[]) {
 	}
 
 	cout << "result : " << ipStack.pop() << endl;
-
-}
-
-int main() {
-	char exp[] = "(3*4)+(4/4)";
-	postfix_calc(exp);
+	
 }
