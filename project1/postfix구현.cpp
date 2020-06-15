@@ -27,8 +27,8 @@ void MyStack<T>::push(T element) {
 		cout << "stack full";
 		return;
 	}
-	tos++;
-	data[tos] = element;
+	
+	data[++tos] = element;
 }
 
 template <class T>
@@ -102,8 +102,6 @@ int Opercalc::Prec(char ch) {
 	case '/':
 		return 2;
 
-	case '^':
-		return 3;
 	}
 	return -1;
 }
@@ -116,7 +114,6 @@ int main() {
 	int i, k;
 	MyStack<char>Stack;
 	MyStack<int> ipStack;
-	MyStack<char> cpStack;
 
 	Opercalc op;
 	Add adder;
@@ -164,33 +161,26 @@ int main() {
 		}
 
 		else {
-			cpStack.push(exp[i]);
-		}
-
-	}
-
-	while (!cpStack.isEmpty()) {
-
-		int val1 = ipStack.pop();
-		int val2 = ipStack.pop();
-
-		switch (cpStack.pop())
-		{
-		case '+':
-			ipStack.push(adder.calc(val1, val2));
-			break;
-		case '-':
-			ipStack.push(subtractor.calc(val1, val2));
-			break;
-		case '*':
-			ipStack.push(multiplier.calc(val1, val2));
-			break;
-		case '/':
-			ipStack.push(divisior.calc(val1, val2));
-			break;
+			int val2 = ipStack.pop();
+			int val1 = ipStack.pop();
+			
+			switch (exp[i])
+			{
+			case '+':
+				ipStack.push(adder.calc(val1, val2));
+				break;
+			case '-':
+				ipStack.push(subtractor.calc(val1, val2));
+				break;
+			case '*':
+				ipStack.push(multiplier.calc(val1, val2));
+				break;
+			case '/':
+				ipStack.push(divisior.calc(val1, val2));
+				break;
+			}
 		}
 	}
-
 	cout << "result : " << ipStack.pop() << endl;
 	
 }
