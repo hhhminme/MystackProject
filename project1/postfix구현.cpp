@@ -1,11 +1,10 @@
-#include <iostream>
-#include <cctype>
+#define _CRT_SECURE_NO_WARNINGS
 #define STACK_ARRAY_SIZE 100
-#define VALUE_SIZE 100
-#ifdef CALC
-#endif // CALC
-
+#define ARRAY_VALUE_SIZE 100
+#include <cctype>
+#include <iostream>
 using namespace std;
+int postfix_calc(char exp[]);
 
 template <class T>
 class MyStack {
@@ -115,18 +114,19 @@ int Opercalc::isOperand(char ch) {
 	return (ch >= '0' && ch <= '9');
 }
 
-int main() {
-	int i, k;
+int postfix_calc(char arr[]) {
 	MyStack<char>Stack;
 	MyStack<int> ipStack;
 	MyStack<char> cpStack;
-	char exp[] = "(3*4)+(4/4)";
 
 	Opercalc op;
 	Add adder;
 	Subtract subtractor;
 	Division divisior;
 	Multiply multiplier;
+	char exp[ARRAY_VALUE_SIZE];
+	strcpy(exp,arr);
+	int i, k;
 
 	for (i = 0, k = -1; exp[i]; i++) {
 		if (op.isOperand(exp[i])) {
@@ -156,13 +156,13 @@ int main() {
 	printf("%s\n", exp);
 
 
-//#ifdef CALC
+	//#ifdef CALC
 	for (i = 0; exp[i]; i++) {
 		if (exp[i] == ' ') continue;
 
 		else if (isdigit(exp[i])) {
 			int num = 0;
-			num =((int)exp[i]-'0');
+			num = ((int)exp[i] - '0');
 
 			ipStack.push(num);
 		}
@@ -197,7 +197,9 @@ int main() {
 
 	cout << "result : " << ipStack.pop() << endl;
 
-
-//#endif //CALC
 }
-//fuck yeah
+
+int main() {
+	char exp[] = "(3*4)+(4/4)";
+	postfix_calc(exp);
+}

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cctype>
 #define STACK_ARRAY_SIZE 100
-#define VALUE_SIZE 100
+#define ARRAY_VALUE_SIZE 100
 using namespace std;
 
 template <class T>
